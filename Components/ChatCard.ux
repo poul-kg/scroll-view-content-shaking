@@ -1,0 +1,5 @@
+<CardPage ux:Class="ChatCard" Margin="0,0,0,50">
+    <!-- <Rectangle Layer="Background" Color="#cde" /> -->
+    <CardHandle Dock="Top" ParentCardName="ChatCard" OnExpand="{ReadProperty OnExpand}" OnCollapse="{ReadProperty OnCollapse}" />
+    <neon.BotChat Dock="Bottom" Height="100%" BotId="staging-bot"/>
+</CardPage>

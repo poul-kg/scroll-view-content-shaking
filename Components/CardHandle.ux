@@ -1,0 +1,86 @@
+<DockPanel ux:Class="CardHandle" Height="35" ClipToBounds="false" Margin="0" Padding="0">
+    <string ux:Property="ParentCardName" />
+    <object ux:Property="OnExpand" />
+    <object ux:Property="OnCollapse" />
+    <JavaScript>
+    var Observable = require('FuseJS/Observable');
+    var locked = false;
+    var parentCardName = this.ParentCardName.value;
+    var visibility = Observable('Visible');
+    var isHidden = Observable(false);
+    var me = this;
+
+    // Locks component for given amount of milliseconds
+    // during that period no events will be thrown by this component
+    // this is usefull when we scroll handle down and it bounces back up and down
+    // and this causes 2/3 animation events
+    function lock(milliseconds) {
+        var timeout = milliseconds || 500;
+
+        locked = true;
+        setTimeout(function () {
+            locked = false;
+        }, timeout);
+    }
+
+    // When user want's to perform expand action
+    // passes control to the function specified via OnExpand attribute
+    function expandCard() {
+        if (locked) {
+            return;
+        }
+        lock();
+
+        if (me.OnExpand !== undefined
+            && me.OnExpand.value !== undefined
+            && typeof me.OnExpand.value === 'function'
+        ) {
+            me.OnExpand.value();
+        }
+    }
+
+    // removes card from the screen
+    // or passes control to the function specified via OnCollapse attribute
+    function collapseCard() {
+        if (locked) {
+            return;
+        }
+        lock();
+
+        if (me.OnCollapse !== undefined
+            && me.OnCollapse.value !== undefined
+            && typeof me.OnCollapse.value === 'function'
+        ) {
+            me.OnCollapse.value();
+        } else {
+            CardManager.popCard();
+        }
+    }
+
+    module.exports = {
+        collapseCard: collapseCard,
+        expandCard: expandCard,
+        parentCardName: parentCardName,
+        visibility: visibility,
+        isHidden: isHidden
+    }
+    </JavaScript>
+    <Rectangle Layer="Background" Color="#fffd" CornerRadius="10,10,0,0">
+    </Rectangle>
+    <ScrollView Padding="0,0,0,0">
+        <Rectangle Dock="Top" Width="55" Height="6" Color="#00000019" CornerRadius="4" Margin="0" Y="13" ux:Name="handle">
+            <Scrolled To="Start" Within="-20">
+                <Callback Handler="{collapseCard}" />
+            </Scrolled>
+            <Scrolled To="End" Within="-10">
+                <Callback Handler="{expandCard}" />
+            </Scrolled>
+        </Rectangle>
+        <WhileTrue Value="{isHidden}">
+                <Change handle.Opacity="0" Duration="0.3" />
+        </WhileTrue>
+        <WhileFalse Value="{isHidden}">
+            <Change handle.Opacity="1" Duration="0.3" />
+        </WhileFalse>
+    </ScrollView>
+</DockPanel>

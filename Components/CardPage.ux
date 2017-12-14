@@ -1,0 +1,22 @@
+<!-- Custom Page Class with predefined page transitions -->
+<DockPanel ux:Class="CardPage">
+    <!-- function to be called when we collapse the card -->
+    <object ux:Property="OnCollapse" />
+    <!-- function to be called when we expand the card -->
+    <object ux:Property="OnExpand" />
+   <!--  <Rectangle Layer="Overlay" Height="1" Width="90%" Color="#eeeeeeee" Alignment="TopCenter" CornerRadius="15,15,0,0" Y="-1" /> -->
+    <Rectangle Layer="Background" Color="#fff" CornerRadius="15,15,0,0" ClipToBounds="true">
+        <Shadow Distance="0" Size="4" Color="#00000019" />
+        <!-- <Stroke Width="1" Color="#aaaaaaee" /> -->
+    </Rectangle>
+
+    <DropShadow Distance="-3" Size="4" Color="#cecece33" />
+
+    <AddingAnimation>
+        <Move RelativeTo="Size" Y="1" Duration="0.3" Easing="SinusoidalInOut" />
+    </AddingAnimation>
+    
+    <RemovingAnimation>
+        <Move RelativeTo="Size" Y="1" Duration="0.3" Easing="SinusoidalInOut" />
+    </RemovingAnimation>
+</DockPanel>

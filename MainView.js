@@ -29,15 +29,15 @@ function goDown() {
 function setChatState(stateIndex) {
     switch (stateIndex) {
         case 2:
-           messagesPanelState.goto(Expanded);
+           chatCardStates.goto(Expanded);
            console.log('Expanded');
            break;
        case 1:
-           messagesPanelState.goto(Half);
+           chatCardStates.goto(Half);
            console.log('Half');
            break;
        case 0:
-           messagesPanelState.goto(Collapsed);
+           chatCardStates.goto(Collapsed);
            console.log('Collapsed');
            break;
        default:

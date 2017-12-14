@@ -1,0 +1,15 @@
+<DockPanel ux:Class="neon.BotChat" BotId="staging-bot">
+    <string ux:Property="BotId" />
+
+    <!-- <Rectangle Layer="Underlay" Color="{Theme.TopToolbarBg}" /> -->
+    <Rectangle Layer="Background" Color="#fff" CornerRadius="15,15,0,0" />
+        <StackPanel Dock="Bottom">
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+            <neon.TimeMessage Text="text" />
+        </StackPanel>
+</DockPanel>

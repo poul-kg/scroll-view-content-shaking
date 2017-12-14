@@ -1,0 +1,8 @@
+<Panel ux:Class="neon.TimeMessage" Text="" Margin="0,12,0,8" Alignment="Center">
+    <string ux:Property="Text" />
+    
+    <Rectangle Padding="16,8,16,8" CornerRadius="100" Clicked="{showDebugCard}">
+        <Text Value="{ReadProperty Text}" Alignment="Center" Color="#04101966" FontSize="15" />
+        <Stroke Width="1" Color="#04101966" />
+    </Rectangle>
+</Panel>
