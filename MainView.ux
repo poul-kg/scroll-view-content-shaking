@@ -1,0 +1,63 @@
+<App>
+    <JavaScript File="MainView.js" />
+    <DockPanel>
+        <StatusBarBackground Dock="Top" />
+        <BottomBarBackground Dock="Bottom" />
+        
+        <Rectangle ux:Class="MyButton" Text="no text" Padding="10" Color="#eee" Margin="3">
+            <string ux:Property="Text" />
+            <Text Value="{ReadProperty Text}" />
+        </Rectangle>
+
+        <Panel Height="30" Dock="Bottom">
+            <Rectangle Layer="Background" Color="#00e" />
+        </Panel>    
+
+        <Panel Dock="Bottom" ux:Name="messagesPanel" Height="90%">
+        <DockPanel>
+            <Rectangle Layer="Background">
+                <Stroke Width="1" Color="#f00" />
+            </Rectangle>
+            <StackPanel Orientation="Horizontal" Dock="Top">
+                <MyButton Text="Up" Clicked="{goUp}" />
+                <MyButton Text="Down" Clicked="{goDown}" />
+            </StackPanel>
+            <Panel>
+                <Rectangle Layer="Background">
+                    <Stroke Width="1" Color="#000" />
+                </Rectangle>
+                <ScrollView AllowedScrollDirections="Vertical">
+                    <StackPanel Alignment="Bottom">
+                        <Each Items="{messages}">
+                            <Rectangle Padding="10" Margin="16,0,16,6">
+                                <Stroke Width="1" Color="#333" />
+                                <Text Value="{text}" />
+                            </Rectangle>
+                        </Each>
+                    </StackPanel>
+                </ScrollView>
+            </Panel>
+
+            <StateGroup ux:Name="messagesPanelState" Active="Expanded">
+                <State ux:Name="Expanded">
+                    <!-- <Change messagesPanel.Margin="0,144,0,0" Duration="0.3" /> -->
+                    <Change messagesPanel.Height="90%" Duration="0.3" />
+                </State>
+                <State ux:Name="Half">
+                    <!-- <Change messagesPanel.Margin="0,200,0,0" Duration="0.3" /> -->
+                    <!-- <Move Target="chatCanvas" Y="y(bottomToolbar)-279" Duration="0.3" /> -->
+                    <Change messagesPanel.Height="55%" Duration="0.3" />
+                </State>
+                <State ux:Name="Collapsed">
+                    <!-- <Change messagesPanel.Margin="0,400,0,0" Duration="0.3" /> -->
+                    <!-- <Move Target="chatCanvas" Y="y(bottomToolbar)-79" Duration="0.3" /> -->
+                    <Change messagesPanel.Height="20%" Delay="0.3" />
+                </State>
+            </StateGroup>
+        </DockPanel>
+        </Panel>
+
+        
+
+    </DockPanel>
+</App>
